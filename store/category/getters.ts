@@ -4,7 +4,8 @@ import { CategoryListType, CategoryResponse } from "~/ts-types/category";
 import { RootState } from "~/ts-types/rootState";
 
 const getters: GetterTree<CategoryListType, RootState> = {
-  categoryList: (state): CategoryResponse => state.categoryList,
+  categoryList: (state: CategoryListType): CategoryResponse =>
+    state.categoryList,
 };
 
-export default { getters };
+export default getters;

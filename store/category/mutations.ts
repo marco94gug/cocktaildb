@@ -8,6 +8,7 @@ const mutations: MutationTree<CategoryListType> = {
     state: CategoryListType,
     payload: CategoryResponse
   ): void => {
+    console.log(payload);
     state.categoryList = payload;
   },
 };
