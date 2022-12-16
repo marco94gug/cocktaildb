@@ -6,19 +6,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "hamburgerMenu",
 
-  methods: {
-    setActiveMenu(e) {
-      if (e.target.tagName === "SPAN") {
-        e.target.parentNode.classList.toggle("active");
-      } else {
-        e.target.classList.toggle("active");
-      }
-    },
-  },
+  props: ["setActiveMenu"],
 };
 </script>
 
@@ -34,6 +26,7 @@ div {
     height: 3px;
     width: 25px;
     transition: all 0.5s;
+    pointer-events: none;
   }
 
   &.active {
@@ -47,6 +40,14 @@ div {
 
     span:nth-child(3) {
       transform: rotate(-45deg) translateY(-6px) translateX(6px);
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  div {
+    span {
+      opacity: 0;
     }
   }
 }
