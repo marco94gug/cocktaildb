@@ -11,8 +11,12 @@ export default {
   name: "hamburgerMenu",
 
   methods: {
-    setActiveMen(e) {
-      e.target.parentNode.classList.toggle("active");
+    setActiveMenu(e) {
+      if (e.target.tagName === "SPAN") {
+        e.target.parentNode.classList.toggle("active");
+      } else {
+        e.target.classList.toggle("active");
+      }
     },
   },
 };
@@ -23,6 +27,7 @@ div {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  height: max-content;
 
   span {
     background-color: rgb(255, 255, 255);
