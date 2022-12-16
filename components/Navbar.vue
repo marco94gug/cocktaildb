@@ -8,6 +8,7 @@
       <li>Categories</li>
       <li>About us</li>
     </ul>
+    <SearchBar />
   </nav>
 </template>
 
@@ -49,7 +50,7 @@ nav {
 
   ul {
     position: absolute;
-    top: 80px;
+    top: calc(80px + 34px);
     background-color: #2b2b2b;
     right: 0;
     width: 100vw;
