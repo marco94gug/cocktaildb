@@ -1,8 +1,7 @@
 import { Middleware } from "@nuxt/types";
 
 const middleware: Middleware = async function ({ store }) {
-  store.dispatch("category/load");
-  console.log("ci sono");
+  await store.dispatch("category/load");
 };
 
 export default middleware;
