@@ -18,13 +18,13 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 30px;
   background-color: #333333;
   height: 80px;
   color: rgb(245, 245, 245);
 
   h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     text-transform: uppercase;
     font-family: "Big Shoulders Display", cursive;
   }

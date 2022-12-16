@@ -1,5 +1,5 @@
 <template>
-  <div @click="(e) => setActiveMen(e)">
+  <div @click="(e) => setActiveMenu(e)">
     <span></span>
     <span></span>
     <span></span>
