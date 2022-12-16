@@ -1,13 +1,15 @@
 <template>
-  <Navbar />
+  <div></div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-
-export default Vue.extend({
+export default {
   name: "IndexPage",
-});
+
+  middleware: "category-dispatch",
+
+  methods: {},
+};
 </script>
 
 <style lang="scss" scoped></style>
