@@ -84,11 +84,11 @@ export default {
     },
 
     handleCategoryClick(category: DrinksType): void {
-      console.log(category);
       this.$router.push(
         `/category/${category.strCategory
-          .replaceAll(/  +/g, "-")
-          .replaceAll("/", "")}`
+          .replaceAll(" ", "-")
+          .replaceAll("/", "")
+          .replaceAll(/--/g, "-")}`
       );
     },
   },

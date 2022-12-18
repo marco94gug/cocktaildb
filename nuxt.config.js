@@ -38,4 +38,14 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push({
+        name: "category",
+        path: "/category/:categoryName/",
+        component: resolve(__dirname, "pages/category/index.vue"),
+      });
+    },
+  },
 };
