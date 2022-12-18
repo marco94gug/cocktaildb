@@ -1,10 +1,10 @@
 <template>
   <nav>
-    <h1>The Cocktail DB</h1>
+    <h1 @click="handleHomeClick">The Cocktail DB</h1>
     <HamMen :setActiveMenu="setActiveMenu" />
     <ul class="menu-list">
       <li @click="handleHomeClick">Home</li>
-      <li>Cocktails</li>
+      <li @click="(e) => handleMenuLIElementClick(e)">Cocktails</li>
       <li class="category" @click="(e) => handleCategoriesClick(e)">
         Categories <span>▲</span>
       </li>
@@ -16,7 +16,7 @@
           {{ category.strCategory }}
         </p>
       </div>
-      <li>About us</li>
+      <li @click="(e) => handleMenuLIElementClick(e)">About us</li>
     </ul>
     <SearchBar />
   </nav>
@@ -58,6 +58,30 @@ export default {
       categoryList.classList.toggle("active");
     },
     handleHomeClick(): void {
+      this.$router.push("/");
+      this.closeAllOpenedMenus();
+    },
+
+    handleCategoryClick(category: DrinksType): void {
+      this.closeAllOpenedMenus();
+      this.$router.push(
+        `/category/${category.strCategory
+          .replaceAll(" ", "-")
+          .replaceAll("/", "")
+          .replaceAll(/--/g, "-")}`
+      );
+    },
+
+    handleMenuLIElementClick(e: MouseEvent): void {
+      const menuListElement = e.target as HTMLLIElement;
+      console.log(menuListElement.textContent?.toLowerCase());
+      this.$router.push(
+        `/${menuListElement.textContent?.toLowerCase().replaceAll(" ", "-")}`
+      );
+      this.closeAllOpenedMenus();
+    },
+
+    closeAllOpenedMenus(): void {
       const categoryList = document.querySelector(
         ".category-list"
       ) as HTMLDivElement;
@@ -68,7 +92,6 @@ export default {
 
       const menuMobileList = document.querySelector(".menu-list");
 
-      this.$router.push("/");
       if (Object.keys(this.active).length) {
         this.active.classList.toggle("active");
       }
@@ -81,15 +104,6 @@ export default {
         categoryList?.classList.remove("active");
         categoryLI.classList.remove("active");
       }
-    },
-
-    handleCategoryClick(category: DrinksType): void {
-      this.$router.push(
-        `/category/${category.strCategory
-          .replaceAll(" ", "-")
-          .replaceAll("/", "")
-          .replaceAll(/--/g, "-")}`
-      );
     },
   },
 };
@@ -111,6 +125,7 @@ nav {
   h1 {
     font-size: 2rem;
     text-transform: uppercase;
+    cursor: pointer;
   }
 
   ul {
@@ -207,6 +222,12 @@ nav {
       gap: 20px;
       height: max-content;
       overflow: visible;
+
+      li {
+        span {
+          display: none;
+        }
+      }
 
       .category-list {
         position: absolute;
