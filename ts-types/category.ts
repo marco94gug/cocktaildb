@@ -10,4 +10,4 @@ type CategoryListType = {
   categoryList: CategoryResponse;
 };
 
-export { CategoryListType, CategoryResponse };
+export { CategoryListType, CategoryResponse, DrinksType };

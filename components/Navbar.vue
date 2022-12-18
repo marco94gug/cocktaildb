@@ -9,7 +9,10 @@
         Categories <span>▲</span>
       </li>
       <div class="category-list">
-        <p v-for="category in categoryList.drinks">
+        <p
+          v-for="category in categoryList.drinks"
+          @click="handleCategoryClick(category)"
+        >
           {{ category.strCategory }}
         </p>
       </div>
@@ -21,6 +24,7 @@
 
 <script lang="ts">
 import { mapGetters } from "vuex";
+import { DrinksType } from "~/ts-types/category";
 
 export default {
   name: "Navbar",
@@ -57,6 +61,10 @@ export default {
       this.$router.push("/");
       this.active.classList.toggle("active");
       document.querySelector(".menu-list")?.classList.toggle("active");
+    },
+
+    handleCategoryClick(category: DrinksType): void {
+      console.log(category);
     },
   },
 };
@@ -177,20 +185,34 @@ nav {
 
       .category-list {
         position: absolute;
+        padding: 0;
         display: grid;
         grid-template-columns: 180px 180px 180px;
         font-size: 1.05rem;
         top: 70px;
-        width: 100%;
         overflow: hidden;
 
         &.active {
           display: grid;
+          padding: 0;
+          height: max-content;
           grid-template-columns: 180px 180px 180px;
           justify-content: center;
-          column-gap: 10px;
-          row-gap: 20px;
-          padding: 20px 20px;
+          width: max-content;
+        }
+
+        p {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 10px 20px;
+
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.82);
+            color: rgba(0, 0, 0, 0.627);
+
+            cursor: pointer;
+          }
         }
       }
     }
