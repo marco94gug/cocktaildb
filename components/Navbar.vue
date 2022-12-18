@@ -5,7 +5,7 @@
     <ul class="menu-list">
       <li @click="handleHomeClick">Home</li>
       <li>Cocktails</li>
-      <li @click="(e) => handleCategoriesClick(e)">
+      <li class="category" @click="(e) => handleCategoriesClick(e)">
         Categories <span>▲</span>
       </li>
       <div class="category-list">
@@ -58,13 +58,38 @@ export default {
       categoryList.classList.toggle("active");
     },
     handleHomeClick(): void {
+      const categoryList = document.querySelector(
+        ".category-list"
+      ) as HTMLDivElement;
+
+      const categoryLI = document.querySelector(
+        ".category"
+      ) as HTMLUListElement;
+
+      const menuMobileList = document.querySelector(".menu-list");
+
       this.$router.push("/");
-      this.active.classList.toggle("active");
-      document.querySelector(".menu-list")?.classList.toggle("active");
+      if (Object.keys(this.active).length) {
+        this.active.classList.toggle("active");
+      }
+
+      if (menuMobileList?.classList.contains("active")) {
+        menuMobileList.classList.remove("active");
+      }
+
+      if (categoryList.classList.contains("active")) {
+        categoryList?.classList.remove("active");
+        categoryLI.classList.remove("active");
+      }
     },
 
     handleCategoryClick(category: DrinksType): void {
       console.log(category);
+      this.$router.push(
+        `/category/${category.strCategory
+          .replaceAll(/  +/g, "-")
+          .replaceAll("/", "")}`
+      );
     },
   },
 };
