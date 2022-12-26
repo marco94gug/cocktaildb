@@ -1,12 +1,25 @@
 <template>
   <div>
-    <input class="search-bar" type="text" placeholder="Search" />
+    <input
+      class="search-bar"
+      type="text"
+      placeholder="Search"
+      @input="(e) => handleOnSearchInput(e)"
+    />
   </div>
 </template>
 
 <script lang="ts">
 export default {
   name: "SearchBar",
+
+  methods: {
+    handleOnSearchInput(e: Event): void {
+      const searchParam = (e.target as HTMLInputElement).value;
+
+      this.$store.dispatch("search/loadSearchResults", searchParam);
+    },
+  },
 };
 </script>
 

@@ -5,3 +5,5 @@ import { RootState } from "~/ts-types/rootState";
 const getters: GetterTree<drinksRes, RootState> = {
   drinksList: (state: drinksRes) => state.drinksList,
 };
+
+export default getters;
