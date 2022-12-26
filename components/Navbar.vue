@@ -66,6 +66,7 @@ export default {
       this.closeAllOpenedMenus();
       this.$router.push(
         `/category/${category.strCategory
+          .toLocaleLowerCase()
           .replaceAll(" ", "-")
           .replaceAll("/", "")
           .replaceAll(/--/g, "-")}`

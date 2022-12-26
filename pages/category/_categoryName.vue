@@ -1,8 +1,8 @@
 <template>
-  <main>
+  <section>
     <h2>Category Page</h2>
     <p>{{ categoryName }}</p>
-  </main>
+  </section>
 </template>
 
 <script lang="ts">
@@ -16,3 +16,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+section {
+  margin-top: 54px;
+}
+</style>
