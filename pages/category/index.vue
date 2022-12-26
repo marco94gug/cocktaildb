@@ -10,7 +10,7 @@ export default {
   name: "categoryPage",
 
   computed: {
-    categoryName() {
+    categoryName(): string {
       return this.$route.params.categoryName;
     },
   },

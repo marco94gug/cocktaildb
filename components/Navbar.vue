@@ -8,14 +8,14 @@
       <li class="category" @click="(e) => handleCategoriesClick(e)">
         Categories <span>▲</span>
       </li>
-      <div class="category-list">
-        <p
+      <ol class="category-list">
+        <li
           v-for="category in categoryList.drinks"
           @click="handleCategoryClick(category)"
         >
           {{ category.strCategory }}
-        </p>
-      </div>
+        </li>
+      </ol>
       <li @click="(e) => handleMenuLIElementClick(e)">About us</li>
     </ul>
     <SearchBar />
@@ -180,7 +180,7 @@ nav {
     .category-list {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 4px;
       background-color: rgb(28, 28, 28);
       width: 100%;
       align-items: center;
@@ -197,6 +197,10 @@ nav {
         opacity: 1;
         overflow: unset;
         padding: 20px 0;
+      }
+
+      li {
+        margin: 10px 0;
       }
     }
   }
@@ -233,27 +237,30 @@ nav {
         position: absolute;
         padding: 0;
         display: grid;
-        grid-template-columns: 180px 180px 180px;
+        grid-template-columns: auto auto auto;
         font-size: 1.05rem;
         top: 70px;
+        left: 0;
+        gap: 0;
         overflow: hidden;
 
         &.active {
           display: grid;
           padding: 0;
           height: max-content;
-          grid-template-columns: 180px 180px 180px;
-          justify-content: center;
           width: max-content;
         }
 
-        p {
+        li {
           display: flex;
           justify-content: center;
           align-items: center;
-          padding: 10px 20px;
+          padding: 20px 20px;
+          margin: 0;
+          width: 180px;
 
           &:hover {
+            border: none;
             background-color: rgba(255, 255, 255, 0.82);
             color: rgba(0, 0, 0, 0.627);
 

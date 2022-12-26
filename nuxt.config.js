@@ -41,11 +41,7 @@ export default {
 
   router: {
     extendRoutes(routes, resolve) {
-      routes.push({
-        name: "category",
-        path: "/category/:categoryName/",
-        component: resolve(__dirname, "pages/category/index.vue"),
-      });
+      routes.push();
     },
   },
 };
