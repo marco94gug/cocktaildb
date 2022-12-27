@@ -1,19 +1,22 @@
 <template>
   <nav>
-    <h1>The Cocktail DB</h1>
+    <h1 @click="handleHomeClick">The Cocktail DB</h1>
     <HamMen :setActiveMenu="setActiveMenu" />
     <ul class="menu-list">
       <li @click="handleHomeClick">Home</li>
-      <li>Cocktails</li>
-      <li @click="(e) => handleCategoriesClick(e)">
+      <li @click="(e) => handleMenuLIElementClick(e)">Cocktails</li>
+      <li class="category" @click="(e) => handleCategoriesClick(e)">
         Categories <span>▲</span>
       </li>
-      <div class="category-list">
-        <p v-for="category in categoryList.drinks">
+      <ol class="category-list">
+        <li
+          v-for="category in categoryList.drinks"
+          @click="handleCategoryClick(category)"
+        >
           {{ category.strCategory }}
-        </p>
-      </div>
-      <li>About us</li>
+        </li>
+      </ol>
+      <li @click="(e) => handleMenuLIElementClick(e)">About us</li>
     </ul>
     <SearchBar />
   </nav>
@@ -21,6 +24,7 @@
 
 <script lang="ts">
 import { mapGetters } from "vuex";
+import { DrinksType } from "~/ts-types/category";
 
 export default {
   name: "Navbar",
@@ -55,8 +59,52 @@ export default {
     },
     handleHomeClick(): void {
       this.$router.push("/");
-      this.active.classList.toggle("active");
-      document.querySelector(".menu-list")?.classList.toggle("active");
+      this.closeAllOpenedMenus();
+    },
+
+    handleCategoryClick(category: DrinksType): void {
+      this.closeAllOpenedMenus();
+      this.$router.push(
+        `/category/${category.strCategory
+          .toLocaleLowerCase()
+          .replaceAll(" ", "-")
+          .replaceAll("/", "")
+          .replaceAll(/--/g, "-")}`
+      );
+    },
+
+    handleMenuLIElementClick(e: MouseEvent): void {
+      const menuListElement = e.target as HTMLLIElement;
+      console.log(menuListElement.textContent?.toLowerCase());
+      this.$router.push(
+        `/${menuListElement.textContent?.toLowerCase().replaceAll(" ", "-")}`
+      );
+      this.closeAllOpenedMenus();
+    },
+
+    closeAllOpenedMenus(): void {
+      const categoryList = document.querySelector(
+        ".category-list"
+      ) as HTMLDivElement;
+
+      const categoryLI = document.querySelector(
+        ".category"
+      ) as HTMLUListElement;
+
+      const menuMobileList = document.querySelector(".menu-list");
+
+      if (Object.keys(this.active).length) {
+        this.active.classList.toggle("active");
+      }
+
+      if (menuMobileList?.classList.contains("active")) {
+        menuMobileList.classList.remove("active");
+      }
+
+      if (categoryList.classList.contains("active")) {
+        categoryList?.classList.remove("active");
+        categoryLI.classList.remove("active");
+      }
     },
   },
 };
@@ -78,6 +126,7 @@ nav {
   h1 {
     font-size: 2rem;
     text-transform: uppercase;
+    cursor: pointer;
   }
 
   ul {
@@ -132,7 +181,7 @@ nav {
     .category-list {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 4px;
       background-color: rgb(28, 28, 28);
       width: 100%;
       align-items: center;
@@ -149,6 +198,10 @@ nav {
         opacity: 1;
         overflow: unset;
         padding: 20px 0;
+      }
+
+      li {
+        margin: 10px 0;
       }
     }
   }
@@ -175,22 +228,45 @@ nav {
       height: max-content;
       overflow: visible;
 
+      li {
+        span {
+          display: none;
+        }
+      }
+
       .category-list {
         position: absolute;
+        padding: 0;
         display: grid;
-        grid-template-columns: 180px 180px 180px;
+        grid-template-columns: auto auto auto;
         font-size: 1.05rem;
         top: 70px;
-        width: 100%;
+        left: 0;
+        gap: 0;
         overflow: hidden;
 
         &.active {
           display: grid;
-          grid-template-columns: 180px 180px 180px;
+          padding: 0;
+          height: max-content;
+          width: max-content;
+        }
+
+        li {
+          display: flex;
           justify-content: center;
-          column-gap: 10px;
-          row-gap: 20px;
+          align-items: center;
           padding: 20px 20px;
+          margin: 0;
+          width: 180px;
+
+          &:hover {
+            border: none;
+            background-color: rgba(255, 255, 255, 0.82);
+            color: rgba(0, 0, 0, 0.627);
+
+            cursor: pointer;
+          }
         }
       }
     }
