@@ -91,10 +91,12 @@ export default {
         ".category"
       ) as HTMLUListElement;
 
-      const menuMobileList = document.querySelector(".menu-list");
+      const menuMobileList = document.querySelector(
+        ".menu-list"
+      ) as HTMLUListElement;
 
       if (Object.keys(this.active).length) {
-        this.active.classList.toggle("active");
+        this.active.classList.remove("active");
       }
 
       if (menuMobileList?.classList.contains("active")) {
