@@ -6,7 +6,9 @@
 </template>
 
 <script lang="ts">
-export default {
+import Vue from "vue";
+
+export default Vue.extend({
   name: "categoryPage",
 
   computed: {
@@ -14,7 +16,7 @@ export default {
       return this.$route.params.categoryName;
     },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

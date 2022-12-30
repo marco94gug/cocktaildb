@@ -10,7 +10,9 @@
 </template>
 
 <script lang="ts">
-export default {
+import Vue from "vue";
+
+export default Vue.extend({
   name: "SearchBar",
 
   methods: {
@@ -20,7 +22,7 @@ export default {
       this.$store.dispatch("search/loadSearchResults", searchParam);
     },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

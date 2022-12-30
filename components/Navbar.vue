@@ -2,13 +2,13 @@
   <nav>
     <h1 @click="handleHomeClick">The Cocktail DB</h1>
     <HamMen :setActiveMenu="setActiveMenu" />
-    <ul class="menu-list">
+    <ul :class="`menu-list ${hamMenuIsActive ? 'active' : ''}`">
       <li @click="handleHomeClick">Home</li>
       <li @click="(e) => handleMenuLIElementClick(e)">Cocktails</li>
-      <li class="category" @click="(e) => handleCategoriesClick(e)">
+      <li class="category" @click="handleCategoriesClick">
         Categories <span>▲</span>
       </li>
-      <ol class="category-list">
+      <ol :class="`category-list ${categoryListIsActive ? 'active' : ''}`">
         <li
           v-for="category in categoryList.drinks"
           @click="handleCategoryClick(category)"
@@ -23,10 +23,11 @@
 </template>
 
 <script lang="ts">
+import Vue from "vue";
 import { mapGetters } from "vuex";
 import { DrinksType } from "~/ts-types/category";
 
-export default {
+export default Vue.extend({
   name: "Navbar",
 
   data() {
@@ -37,26 +38,18 @@ export default {
 
   computed: {
     ...mapGetters("category", ["categoryList"]),
+    ...mapGetters("navbar", ["hamMenuIsActive", "categoryListIsActive"]),
   },
 
   methods: {
-    setActiveMenu(e: MouseEvent): void {
-      const target = e.target as HTMLDivElement;
-      this.active = target;
-      const menuList = document.querySelector(".menu-list") as HTMLUListElement;
-
-      menuList.classList.toggle("active");
-      target.classList.toggle("active");
+    setActiveMenu(): void {
+      this.$store.commit("navbar/SET_HAMMENU_OPEN_CLOSE");
     },
-    handleCategoriesClick(e: MouseEvent): void {
-      const categoryMenuLi = e.target as HTMLLIElement;
-      const categoryList = document.querySelector(
-        ".category-list"
-      ) as HTMLDivElement;
 
-      categoryMenuLi.classList.toggle("active");
-      categoryList.classList.toggle("active");
+    handleCategoriesClick(): void {
+      this.$store.commit("navbar/SET_CATEGORYLIST_OPEN_CLOSE");
     },
+
     handleHomeClick(): void {
       this.$router.push("/");
       this.closeAllOpenedMenus();
@@ -64,7 +57,8 @@ export default {
 
     handleCategoryClick(category: DrinksType): void {
       this.closeAllOpenedMenus();
-      this.$router.push(
+      const router = this.$router;
+      router.push(
         `/category/${category.strCategory
           .toLocaleLowerCase()
           .replaceAll(" ", "-")
@@ -83,33 +77,11 @@ export default {
     },
 
     closeAllOpenedMenus(): void {
-      const categoryList = document.querySelector(
-        ".category-list"
-      ) as HTMLDivElement;
-
-      const categoryLI = document.querySelector(
-        ".category"
-      ) as HTMLUListElement;
-
-      const menuMobileList = document.querySelector(
-        ".menu-list"
-      ) as HTMLUListElement;
-
-      if (Object.keys(this.active).length) {
-        this.active.classList.remove("active");
-      }
-
-      if (menuMobileList?.classList.contains("active")) {
-        menuMobileList.classList.remove("active");
-      }
-
-      if (categoryList.classList.contains("active")) {
-        categoryList?.classList.remove("active");
-        categoryLI.classList.remove("active");
-      }
+      this.$store.commit("navbar/SET_HAMMENU_CLOSE");
+      this.$store.commit("navbar/SET_CATEGORYLIST_CLOSE");
     },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>
