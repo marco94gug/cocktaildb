@@ -5,7 +5,10 @@
     <ul :class="`menu-list ${hamMenuIsActive ? 'active' : ''}`">
       <li @click="handleHomeClick">Home</li>
       <li @click="(e) => handleMenuLIElementClick(e)">Cocktails</li>
-      <li class="category" @click="handleCategoriesClick">
+      <li
+        :class="`category ${categoryListIsActive ? 'active' : ''}`"
+        @click="handleCategoriesClick"
+      >
         Categories <span>▲</span>
       </li>
       <ol :class="`category-list ${categoryListIsActive ? 'active' : ''}`">
@@ -44,6 +47,10 @@ export default Vue.extend({
   methods: {
     setActiveMenu(): void {
       this.$store.commit("navbar/SET_HAMMENU_OPEN_CLOSE");
+
+      if (this.categoryList) {
+        this.$store.commit("navbar/SET_CATEGORYLIST_CLOSE");
+      }
     },
 
     handleCategoriesClick(): void {
@@ -69,7 +76,7 @@ export default Vue.extend({
 
     handleMenuLIElementClick(e: MouseEvent): void {
       const menuListElement = e.target as HTMLLIElement;
-      console.log(menuListElement.textContent?.toLowerCase());
+
       this.$router.push(
         `/${menuListElement.textContent?.toLowerCase().replaceAll(" ", "-")}`
       );
@@ -129,7 +136,6 @@ nav {
       letter-spacing: 1.5px;
       cursor: pointer;
       transition: all 0.35s;
-      border-bottom: 1px solid rgba(255, 255, 255, 0);
       width: max-content;
       display: flex;
       gap: 10px;
@@ -175,7 +181,8 @@ nav {
       }
 
       li {
-        margin: 10px 0;
+        font-size: 0.95rem;
+        margin: 8px 0;
       }
     }
   }

@@ -17,7 +17,7 @@ export default Vue.extend({
   name: "SearchBar",
 
   methods: {
-    handleOnSearchInput(e: MouseEvent): void {
+    handleOnSearchInput(e: Event): void {
       const searchParam = (e.target as HTMLInputElement).value;
       if (searchParam) {
         this.$store.dispatch("search/loadSearchResults", searchParam);
