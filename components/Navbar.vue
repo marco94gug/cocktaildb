@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav @mouseleave="closeAllOpenedMenus">
     <h1 @click="handleHomeClick">The Cocktail DB</h1>
     <HamMen :setActiveMenu="setActiveMenu" />
     <ul :class="`menu-list ${hamMenuIsActive ? 'active' : ''}`">
@@ -212,6 +212,10 @@ nav {
       li {
         span {
           display: none;
+        }
+
+        &.active {
+          border-bottom: 1px solid rgba(245, 245, 245);
         }
       }
 
