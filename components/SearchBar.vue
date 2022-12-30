@@ -5,6 +5,7 @@
       type="text"
       placeholder="Search"
       @input="(e) => handleOnSearchInput(e)"
+      @click="closeAllMenu"
     />
   </div>
 </template>
@@ -16,10 +17,17 @@ export default Vue.extend({
   name: "SearchBar",
 
   methods: {
-    handleOnSearchInput(e: Event): void {
+    handleOnSearchInput(e: MouseEvent): void {
       const searchParam = (e.target as HTMLInputElement).value;
-
-      this.$store.dispatch("search/loadSearchResults", searchParam);
+      if (searchParam) {
+        this.$store.dispatch("search/loadSearchResults", searchParam);
+      } else {
+        this.$store.commit("search/CLEAR_SEARCH_RESULTS");
+      }
+    },
+    closeAllMenu(): void {
+      this.$store.commit("navbar/SET_HAMMENU_CLOSE");
+      this.$store.commit("navbar/SET_CATEGORYLIST_CLOSE");
     },
   },
 });
