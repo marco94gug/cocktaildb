@@ -1,4 +1,4 @@
-type drinkType = {
+interface drinkType {
   idDrink: string;
   strDrink: string;
   strDrinkAlternate: string;
@@ -50,7 +50,7 @@ type drinkType = {
   strImageAttribution: string;
   strCreativeCommonsConfirmed: string;
   dateModified?: string;
-};
+}
 
 type drinksListType = {
   drinks: Array<drinkType>;
