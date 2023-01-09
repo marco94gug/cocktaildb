@@ -65,6 +65,7 @@ export default Vue.extend({
 
     div {
       .hero-img {
+        top: 0;
       }
     }
   }
