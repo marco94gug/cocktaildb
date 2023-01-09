@@ -4,3 +4,9 @@
     <Nuxt />
   </main>
 </template>
+
+<script>
+export default {
+  middleware: "category-dispatch",
+};
+</script>

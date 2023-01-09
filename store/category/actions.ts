@@ -7,13 +7,16 @@ import { RootState } from "~/ts-types/rootState";
 const actions: ActionTree<CategoryListType, RootState> = {
   async load({ commit }) {
     try {
-      const categoryList = await this.$axios.$get("list.php", {
+      const categoryList = await this.$freeCocktail({
+        method: "GET",
+        baseURL: "https://www.thecocktaildb.com/api/json/v1/1/list.php",
+        url: "list.php",
         params: {
           c: "list",
         },
       });
 
-      commit(SET_CATEGORY_LIST, categoryList);
+      commit(SET_CATEGORY_LIST, categoryList.data);
     } catch (e) {
       console.log(e);
     }

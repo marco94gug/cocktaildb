@@ -26,11 +26,15 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue, { VueConstructor } from "vue";
 import { mapGetters } from "vuex";
 import { DrinksType } from "~/ts-types/category";
 
-export default Vue.extend({
+export default (
+  Vue as VueConstructor<
+    Vue & { hamMenuIsActive: boolean; categoryListIsActive: boolean }
+  >
+).extend({
   name: "Navbar",
 
   data() {
@@ -40,8 +44,11 @@ export default Vue.extend({
   },
 
   computed: {
-    ...mapGetters("category", ["categoryList"]),
+    // ...mapGetters("category", ["categoryList"]),
     ...mapGetters("navbar", ["hamMenuIsActive", "categoryListIsActive"]),
+    categoryList() {
+      return this.$store.getters["category/categoryList"];
+    },
   },
 
   methods: {
@@ -59,11 +66,11 @@ export default Vue.extend({
 
     handleHomeClick(): void {
       this.$router.push("/");
-      this.closeAllOpenedMenus();
+      // this.closeAllOpenedMenus();
     },
 
     handleCategoryClick(category: DrinksType): void {
-      this.closeAllOpenedMenus();
+      // this.closeAllOpenedMenus();
       const router = this.$router;
       router.push(
         `/category/${category.strCategory
@@ -80,7 +87,7 @@ export default Vue.extend({
       this.$router.push(
         `/${menuListElement.textContent?.toLowerCase().replaceAll(" ", "-")}`
       );
-      this.closeAllOpenedMenus();
+      // this.closeAllOpenedMenus();
     },
 
     closeAllOpenedMenus(): void {
