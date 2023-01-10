@@ -33,7 +33,12 @@ import { DrinksType } from "~/ts-types/category";
 
 export default (
   Vue as VueConstructor<
-    Vue & { hamMenuIsActive: boolean; categoryListIsActive: boolean }
+    Vue & {
+      hamMenuIsActive: boolean;
+      categoryListIsActive: boolean;
+      SET_CATEGORYLIST_OPEN_CLOSE: any;
+      SET_HAMMENU_CLOSE: any;
+    }
   >
 ).extend({
   name: "Navbar",
@@ -71,11 +76,9 @@ export default (
 
     handleHomeClick(): void {
       this.$router.push("/");
-      // this.closeAllOpenedMenus();
     },
 
     handleCategoryClick(category: DrinksType): void {
-      // this.closeAllOpenedMenus();
       const router = this.$router;
       router.push(
         `/category/${category.strCategory
@@ -92,7 +95,6 @@ export default (
       this.$router.push(
         `/${menuListElement.textContent?.toLowerCase().replaceAll(" ", "-")}`
       );
-      // this.closeAllOpenedMenus();
     },
 
     closeAllOpenedMenus(): void {
