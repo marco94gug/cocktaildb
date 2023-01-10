@@ -28,7 +28,7 @@
 <script lang="ts">
 import Vue, { VueConstructor } from "vue";
 import { mapGetters } from "vuex";
-import { mapMutations } from "vuex/types/helpers";
+import { mapMutations } from "vuex";
 import { DrinksType } from "~/ts-types/category";
 
 export default (
