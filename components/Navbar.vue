@@ -28,6 +28,7 @@
 <script lang="ts">
 import Vue, { VueConstructor } from "vue";
 import { mapGetters } from "vuex";
+import { mapMutations } from "vuex/types/helpers";
 import { DrinksType } from "~/ts-types/category";
 
 export default (
@@ -52,16 +53,20 @@ export default (
   },
 
   methods: {
+    ...mapMutations("navbar", [
+      "SET_HAMMENU_OPEN_CLOSE",
+      "SET_CATEGORYLIST_CLOSE",
+    ]),
     setActiveMenu(): void {
-      this.$store.commit("navbar/SET_HAMMENU_OPEN_CLOSE");
+      this.SET_HAMMENU_OPEN_CLOSE;
 
       if (this.categoryList) {
-        this.$store.commit("navbar/SET_CATEGORYLIST_CLOSE");
+        this.SET_CATEGORYLIST_CLOSE;
       }
     },
 
     handleCategoriesClick(): void {
-      this.$store.commit("navbar/SET_CATEGORYLIST_OPEN_CLOSE");
+      this.SET_CATEGORYLIST_OPEN_CLOSE;
     },
 
     handleHomeClick(): void {
@@ -91,8 +96,8 @@ export default (
     },
 
     closeAllOpenedMenus(): void {
-      this.$store.commit("navbar/SET_HAMMENU_CLOSE");
-      this.$store.commit("navbar/SET_CATEGORYLIST_CLOSE");
+      this.SET_HAMMENU_CLOSE;
+      this.SET_CATEGORYLIST_CLOSE;
     },
   },
 });
