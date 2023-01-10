@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Hero />
+    <Hero :topDrinks="[1, 2, 3, 4]" />
     <ul>
       <li v-for="drink in drinksList.drinks">{{ drink.strDrink }}</li>
     </ul>

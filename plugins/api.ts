@@ -1,6 +1,7 @@
 import { Context } from "@nuxt/types";
+import { Plugin } from "@nuxt/types";
 
-export default function ({ $axios }: Context, inject: any) {
+const plugin: Plugin = function ({ $axios }: Context, inject: any) {
   const rapidCocktail = $axios.create({
     baseURL: "https://the-cocktail-db.p.rapidapi.com",
     headers: {
@@ -19,4 +20,6 @@ export default function ({ $axios }: Context, inject: any) {
 
   inject("rapidCocktail", rapidCocktail);
   inject("freeCocktail", freeCocktail);
-}
+};
+
+export default plugin;
