@@ -17,6 +17,10 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ["~/assets/css/global.css"],
 
+  env: {
+    API_KEY: process.env.API_KEY,
+  },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ["~/plugins/api.ts"],
 
@@ -27,6 +31,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     "@nuxt/typescript-build",
+    "@nuxtjs/fontawesome",
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -39,9 +44,20 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
+  fontawesome: {
+    icons: {
+      solid: true,
+      brands: true,
+    },
+  },
+
   router: {
     extendRoutes(routes, resolve) {
-      routes.push();
+      routes.push({
+        name: "drink",
+        path: "/drink/:id",
+        component: resolve(__dirname, "pages/-drink.vue"),
+      });
     },
   },
 };

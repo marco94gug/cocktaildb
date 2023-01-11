@@ -12,15 +12,21 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { mapGetters } from "vuex";
 
 export default Vue.extend({
   name: "SearchBar",
 
+  computed: {
+    ...mapGetters("search", ["drinksList"]),
+  },
+
   methods: {
     handleOnSearchInput(e: Event): void {
-      const searchParam = (e.target as HTMLInputElement).value;
-      if (searchParam) {
-        this.$store.dispatch("search/loadSearchResults", searchParam);
+      const searchValue = (e.target as HTMLInputElement).value;
+
+      if (searchValue.length > 1) {
+        this.$store.dispatch("search/loadSearchResults", searchValue);
       } else {
         this.$store.commit("search/CLEAR_SEARCH_RESULTS");
       }

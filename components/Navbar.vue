@@ -28,7 +28,7 @@
 <script lang="ts">
 import Vue, { VueConstructor } from "vue";
 import { mapGetters } from "vuex";
-import { mapMutations } from "vuex/types/helpers";
+import { mapMutations } from "Vuex";
 import { DrinksType } from "~/ts-types/category";
 
 export default (
@@ -36,8 +36,6 @@ export default (
     Vue & {
       hamMenuIsActive: boolean;
       categoryListIsActive: boolean;
-      SET_CATEGORYLIST_OPEN_CLOSE: any;
-      SET_HAMMENU_CLOSE: any;
     }
   >
 ).extend({
@@ -61,25 +59,31 @@ export default (
     ...mapMutations("navbar", [
       "SET_HAMMENU_OPEN_CLOSE",
       "SET_CATEGORYLIST_CLOSE",
+      "SET_CATEGORYLIST_OPEN_CLOSE",
+      "SET_HAMMENU_CLOSE",
     ]),
     setActiveMenu(): void {
-      this.SET_HAMMENU_OPEN_CLOSE;
+      this.SET_HAMMENU_OPEN_CLOSE();
+      console.log("cliccato");
 
       if (this.categoryList) {
-        this.SET_CATEGORYLIST_CLOSE;
+        this.SET_CATEGORYLIST_CLOSE();
       }
     },
 
     handleCategoriesClick(): void {
-      this.SET_CATEGORYLIST_OPEN_CLOSE;
+      this.SET_CATEGORYLIST_OPEN_CLOSE();
     },
 
     handleHomeClick(): void {
       this.$router.push("/");
+
+      this.closeAllOpenedMenus();
     },
 
     handleCategoryClick(category: DrinksType): void {
       const router = this.$router;
+      this.closeAllOpenedMenus();
       router.push(
         `/category/${category.strCategory
           .toLocaleLowerCase()
@@ -92,14 +96,16 @@ export default (
     handleMenuLIElementClick(e: MouseEvent): void {
       const menuListElement = e.target as HTMLLIElement;
 
+      this.closeAllOpenedMenus();
+
       this.$router.push(
         `/${menuListElement.textContent?.toLowerCase().replaceAll(" ", "-")}`
       );
     },
 
     closeAllOpenedMenus(): void {
-      this.SET_HAMMENU_CLOSE;
-      this.SET_CATEGORYLIST_CLOSE;
+      this.SET_HAMMENU_CLOSE();
+      this.SET_CATEGORYLIST_CLOSE();
     },
   },
 });
@@ -108,7 +114,7 @@ export default (
 <style lang="scss" scoped>
 nav {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   justify-content: space-between;
   align-items: center;

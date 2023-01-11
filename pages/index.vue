@@ -1,8 +1,14 @@
 <template>
   <div>
-    <Hero />
+    <Hero :topDrinks="[1, 2, 3, 4]" />
     <ul>
-      <li v-for="drink in drinksList.drinks">{{ drink.strDrink }}</li>
+      <li
+        v-for="drink in drinksList.drinks"
+        :id="drink.idDrink"
+        @click="(e) => handleDrinkClick(e)"
+      >
+        {{ drink.strDrink }}
+      </li>
     </ul>
   </div>
 </template>
@@ -22,6 +28,14 @@ export default Vue.extend({
     ...mapGetters("search", ["drinksList"]),
   },
   components: { Hero },
+
+  methods: {
+    handleDrinkClick(e: Event): void {
+      const idDrink = (e.target as HTMLLIElement).id;
+
+      this.$router.push(`/drink/${idDrink}`);
+    },
+  },
 });
 </script>
 
