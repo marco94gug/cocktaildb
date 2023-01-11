@@ -60,4 +60,9 @@ type drinksRes = {
   drinksList: drinksListType;
 };
 
-export { drinkType, drinksListType, drinksRes };
+interface drinksState {
+  drink: drinkType;
+  topDrinks: drinksRes;
+}
+
+export { drinkType, drinksListType, drinksRes, drinksState };

@@ -7,7 +7,7 @@ import { SET_SEARCH_RESULTS } from "./mutations";
 const actions: ActionTree<drinksRes, RootState> = {
   async loadSearchResults({ commit }, searchParam) {
     try {
-      const res = await this.$rapidCocktail.$get("search.php", {
+      const res = await this.$rapidCocktail.$get("/search.php", {
         params: {
           s: searchParam,
         },
