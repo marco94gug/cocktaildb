@@ -12,9 +12,14 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { mapGetters } from "vuex";
 
 export default Vue.extend({
   name: "SearchBar",
+
+  computed: {
+    ...mapGetters("search", ["drinksList"]),
+  },
 
   methods: {
     handleOnSearchInput(e: Event): void {
