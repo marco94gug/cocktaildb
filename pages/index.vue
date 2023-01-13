@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Hero :topDrinks="[1, 2, 3, 4]" />
+    <Hero :topDrinks="topDrinks.drinks" />
+    <button @click="checkDrinks">Check Top Drinks</button>
     <ul>
       <li
         v-for="drink in drinksList.drinks"
@@ -26,6 +27,7 @@ export default Vue.extend({
   middleware: "home-dispatch",
   computed: {
     ...mapGetters("search", ["drinksList"]),
+    ...mapGetters("drinks", ["topDrinks"]),
   },
   components: { Hero },
 
@@ -34,6 +36,10 @@ export default Vue.extend({
       const idDrink = (e.target as HTMLLIElement).id;
 
       this.$router.push(`/drink/${idDrink}`);
+    },
+
+    checkDrinks(): void {
+      console.log(this.topDrinks.drinks);
     },
   },
 });
