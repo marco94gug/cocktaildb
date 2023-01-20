@@ -63,6 +63,7 @@ type drinksRes = {
 interface drinksState {
   drink: drinkType;
   topDrinks: drinksRes;
+  mostLatestDrinks: drinksRes;
 }
 
 export { drinkType, drinksListType, drinksRes, drinksState };

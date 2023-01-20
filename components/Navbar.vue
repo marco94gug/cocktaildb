@@ -114,7 +114,7 @@ export default (
 <style lang="scss" scoped>
 nav {
   position: relative;
-  z-index: 2;
+  z-index: 4;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -248,12 +248,13 @@ nav {
         top: 70px;
         left: 0;
         gap: 0;
-        overflow: hidden;
+        width: max-content;
+        overflow: hidden !important;
 
         &.active {
           display: grid;
           padding: 0;
-          height: max-content;
+          height: 220px;
           width: max-content;
         }
 
