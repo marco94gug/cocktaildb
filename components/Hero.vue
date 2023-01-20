@@ -83,6 +83,7 @@ export default Vue.extend({
   margin-top: 54px;
   height: 30vh;
   overflow: hidden;
+  background-color: #333333;
 
   title {
     position: absolute;
@@ -91,7 +92,7 @@ export default Vue.extend({
     height: 100%;
     display: flex;
     align-items: center;
-    z-index: 1;
+    z-index: 2;
 
     h2 {
       color: white;
@@ -122,7 +123,7 @@ export default Vue.extend({
       justify-content: space-between;
       align-items: center;
       width: 100vw;
-      z-index: 1;
+      z-index: 2;
 
       button {
         background: none;
@@ -161,7 +162,7 @@ export default Vue.extend({
         height: 100%;
         object-fit: cover;
         transition: all 0.8s;
-        z-index: -1;
+        z-index: 0;
         filter: blur(1.5px);
         object-position: 0 -60px;
       }
@@ -210,6 +211,7 @@ export default Vue.extend({
       .img-container {
         .overlay {
           position: absolute;
+          z-index: 1;
           top: 0;
           left: auto;
           height: 100%;
@@ -218,7 +220,7 @@ export default Vue.extend({
           background: linear-gradient(
             90deg,
             rgba(255, 255, 255, 0) 40%,
-            rgba(255, 255, 255, 1) 60%
+            #333333 60%
           );
         }
       }
