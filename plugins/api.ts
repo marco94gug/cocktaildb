@@ -3,11 +3,11 @@ import { Plugin } from "@nuxt/types";
 
 const plugin: Plugin = function ({ $axios }: Context, inject: any) {
   const rapidCocktail = $axios.create({
-    baseURL: "www.thecocktaildb.com/api/json/v1/1/",
+    baseURL: "https://www.thecocktaildb.com/api/json/v1/1/",
     headers: {
       "Content-Type": "application/json",
-      "X-RapidAPI-Key": process.env.API_KEY,
-      "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
+      // "X-RapidAPI-Key": process.env.API_KEY,
+      // "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
     },
   });
 

@@ -1,16 +1,9 @@
 <template>
   <div>
     <Hero :topDrinks="topDrinks.drinks" />
-    <button @click="checkDrinks">Check Top Drinks</button>
-    <ul>
-      <li
-        v-for="drink in drinksList.drinks"
-        :id="drink.idDrink"
-        @click="(e) => handleDrinkClick(e)"
-      >
-        {{ drink.strDrink }}
-      </li>
-    </ul>
+    <section class="home">
+      <Carousel />
+    </section>
   </div>
 </template>
 
@@ -26,23 +19,16 @@ export default Vue.extend({
   },
   middleware: "home-dispatch",
   computed: {
-    ...mapGetters("search", ["drinksList"]),
     ...mapGetters("drinks", ["topDrinks"]),
   },
   components: { Hero },
-
-  methods: {
-    handleDrinkClick(e: Event): void {
-      const idDrink = (e.target as HTMLLIElement).id;
-
-      this.$router.push(`/drink/${idDrink}`);
-    },
-
-    checkDrinks(): void {
-      console.log(this.topDrinks.drinks);
-    },
-  },
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@media only screen and (min-width: 768px) {
+  .home {
+    padding: 100px;
+  }
+}
+</style>
