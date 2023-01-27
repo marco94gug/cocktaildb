@@ -6,11 +6,7 @@ import { SET_DRINK, SET_MOST_LATEST_DRINKS, SET_TOP_DRINKS } from "./mutations";
 
 const actions: ActionTree<RootState, drinksState> = {
   async loadTopDrinks({ commit }) {
-    const topDrinksRes = await this.$freeCocktail.$get("search.php", {
-      params: {
-        s: "cocktail",
-      },
-    });
+    const topDrinksRes = await this.$rapidCocktail.$get("/popular.php");
 
     commit(SET_TOP_DRINKS, topDrinksRes);
   },
