@@ -2,7 +2,7 @@
   <div>
     <Hero :topDrinks="topDrinks.drinks" />
     <section class="home">
-      <Carousel />
+      <Carousel :dataList="topDrinks.drinks" />
     </section>
   </div>
 </template>

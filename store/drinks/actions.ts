@@ -24,11 +24,7 @@ const actions: ActionTree<RootState, drinksState> = {
   },
 
   async loadMostLatestDrinks({ commit }) {
-    const mostLatestDrinksRes = await this.$rapidCocktail.$get("filter.php", {
-      params: {
-        a: "Alcoholic",
-      },
-    });
+    const mostLatestDrinksRes = await this.$rapidCocktail.$get("latest.php");
 
     commit(SET_MOST_LATEST_DRINKS, mostLatestDrinksRes);
   },

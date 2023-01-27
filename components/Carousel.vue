@@ -1,22 +1,36 @@
 <template>
   <div class="carousel">
-    <img src="https://picsum.photos/300/200?random=1" alt="test-img" />
-    <img src="https://picsum.photos/300/200?random=2" alt="test-img" />
-    <img src="https://picsum.photos/300/200?random=3" alt="test-img" />
-    <img src="https://picsum.photos/300/200?random=4" alt="test-img" />
-    <img src="https://picsum.photos/300/200?random=5" alt="test-img" />
+    <DrinkCard
+      v-for="drink in dataListLength(8)"
+      :title="drink.strDrink"
+      :image="drink.strDrinkThumb"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue, { PropType } from "vue";
+import { VueConstructor } from "vue/types/umd";
+import { drinkType } from "~/ts-types/drinks";
+import DrinkCard from "./DrinkCard.vue";
 
-export default Vue.extend({
+export default (Vue as VueConstructor).extend({
   data() {
     return {};
   },
+  props: {
+    dataList: {
+      type: [] as PropType<drinkType[]>,
+      required: true,
+    },
+  },
+  components: { DrinkCard },
 
-  props: [],
+  methods: {
+    dataListLength(n: number): drinkType[] {
+      return this.dataList.filter((_, i: number) => i < n);
+    },
+  },
 });
 </script>
 
@@ -25,22 +39,14 @@ export default Vue.extend({
   display: flex;
   gap: 10px;
   width: calc(100% - 40px);
+  padding: 10px 0;
   overflow-x: scroll;
   box-sizing: border-box;
   margin: 20px;
-
-  img {
-    height: 100px;
-    width: 300px;
-  }
 }
 
 @media only screen and (min-width: 768px) {
   .carousel {
-    img {
-      height: 100%;
-      widows: 100%;
-    }
   }
 }
 </style>
