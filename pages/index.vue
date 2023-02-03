@@ -36,6 +36,8 @@ export default Vue.extend({
   .main-section {
     .home {
       padding: 100px;
+      display: flex;
+      flex-direction: column;
     }
   }
 }
