@@ -11,9 +11,6 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  data() {
-    return {};
-  },
   props: {
     title: {
       type: String,
@@ -33,11 +30,12 @@ export default Vue.extend({
   border-radius: 10px;
   overflow: hidden;
   flex: 0 0 auto;
-  width: 300px;
+  width: 200px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.232);
+  cursor: pointer;
 
   img {
-    height: 300px;
+    height: 200px;
   }
 
   .drink_info {
@@ -45,6 +43,25 @@ export default Vue.extend({
     align-items: center;
     height: 40px;
     padding: 0 10px;
+    font-size: 0.95rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .drink_card {
+    width: 300px;
+
+    &:hover  {
+      border: 2px solid red;
+    }
+
+    img {
+      height: 300px;
+    }
+
+    .drink_info {
+      font-size: 1rem;
+    }
   }
 }
 </style>

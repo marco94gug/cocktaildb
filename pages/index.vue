@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="main-section">
     <Hero :topDrinks="topDrinks.drinks" />
     <section class="home">
-      <Carousel :dataList="topDrinks.drinks" />
+      <Carousel title="Top Drinks" :dataList="topDrinks.drinks" />
     </section>
   </div>
 </template>
@@ -10,7 +10,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { mapGetters } from "vuex";
-import Hero from "~/components/Hero.vue";
+import Hero from "../components/Hero.vue";
 
 export default Vue.extend({
   name: "IndexPage",
@@ -26,9 +26,17 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+.main-section {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
 @media only screen and (min-width: 768px) {
-  .home {
-    padding: 100px;
+  .main-section {
+    .home {
+      padding: 100px;
+    }
   }
 }
 </style>

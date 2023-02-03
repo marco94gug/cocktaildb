@@ -1,4 +1,4 @@
-import { drinksRes, drinkType, drinksState } from "~/ts-types/drinks";
+import { drinksRes, drinkType, drinksState } from "../../ts-types/drinks";
 
 export default (): drinksState => ({
   drink: {} as drinkType,

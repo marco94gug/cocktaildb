@@ -9,10 +9,6 @@ import Vue from "vue";
 import { mapGetters } from "vuex";
 
 export default Vue.extend({
-  data() {
-    return {};
-  },
-
   middleware: "drink-dispatch",
 
   computed: {

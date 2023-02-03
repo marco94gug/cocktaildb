@@ -1,8 +1,8 @@
 import { ActionTree } from "vuex";
 
 import { SET_CATEGORY_LIST } from "./mutations";
-import { CategoryListType } from "~/ts-types/category";
-import { RootState } from "~/ts-types/rootState";
+import { CategoryListType } from "../../ts-types/category";
+import { RootState } from "../../ts-types/rootState";
 
 const actions: ActionTree<CategoryListType, RootState> = {
   async load({ commit }) {

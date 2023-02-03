@@ -1,2 +1,2 @@
-type RootState = Record<string, any>;
+type RootState = Record<string, unknown>;
 export { RootState };

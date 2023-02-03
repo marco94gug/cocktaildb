@@ -1,5 +1,5 @@
 import { MutationTree } from "vuex";
-import { navBarStatusType } from "~/ts-types/navBarStatus";
+import { navBarStatusType } from "../../ts-types/navBarStatus";
 
 export const SET_HAMMENU_CLOSE = "SET_HAMMENU_CLOSE";
 export const SET_HAMMENU_OPEN_CLOSE = "SET_HAMMENU_OPEN_CLOSE";

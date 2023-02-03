@@ -1,5 +1,5 @@
 import { MutationTree } from "vuex";
-import { drinksState } from "~/ts-types/drinks";
+import { drinksState } from "../../ts-types/drinks";
 
 export const SET_TOP_DRINKS = "SET_TOP_DRINKS";
 export const SET_DRINK = "SET_DRINK";

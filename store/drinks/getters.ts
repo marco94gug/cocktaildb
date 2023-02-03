@@ -1,6 +1,6 @@
 import { GetterTree } from "vuex";
-import { drinksState } from "~/ts-types/drinks";
-import { RootState } from "~/ts-types/rootState";
+import { drinksState } from "../../ts-types/drinks";
+import { RootState } from "../../ts-types/rootState";
 
 const getters: GetterTree<RootState, drinksState> = {
   drink: (state) => state.drink,

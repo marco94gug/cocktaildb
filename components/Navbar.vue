@@ -28,7 +28,7 @@
 <script lang="ts">
 import Vue, { VueConstructor } from "vue";
 import { mapGetters } from "vuex";
-import { mapMutations } from "Vuex";
+import { mapMutations } from "vuex";
 import { DrinksType } from "~/ts-types/category";
 
 export default (
@@ -210,7 +210,8 @@ nav {
 
 @media only screen and (min-width: 768px) {
   nav {
-    position: relative;
+    position: fixed;
+    width: 100%;
     gap: 20px;
 
     h1 {
