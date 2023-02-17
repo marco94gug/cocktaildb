@@ -172,7 +172,7 @@ export default Vue.extend({
 
 @media only screen and (min-width: 768px) {
   .hero {
-    margin-top: 0;
+    margin-top: 80px;
     height: 40vh;
 
     .title {

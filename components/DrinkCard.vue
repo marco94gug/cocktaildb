@@ -1,5 +1,5 @@
 <template>
-  <div class="drink_card">
+  <div class="drink_card" @click="onClick(drinkInfo.idDrink)">
     <img :src="image" :alt="title" />
     <div class="drink_info">
       <h3>{{ title }}</h3>
@@ -19,6 +19,16 @@ export default Vue.extend({
     image: {
       type: String,
       required: true,
+    },
+    drinkInfo: {
+      type: Object,
+      required: true,
+    },
+  },
+
+  methods: {
+    onClick(id: string) {
+      this.$emit("clicked", id as string);
     },
   },
 });
