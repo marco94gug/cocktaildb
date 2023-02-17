@@ -3,6 +3,7 @@
     <Hero :topDrinks="topDrinks.drinks" />
     <section class="home">
       <Carousel title="Top Drinks" :dataList="topDrinks.drinks" />
+      <Carousel title="Most Latest" :dataList="mostLatestDrinks.drinks" />
     </section>
   </div>
 </template>
@@ -19,7 +20,7 @@ export default Vue.extend({
   },
   middleware: "home-dispatch",
   computed: {
-    ...mapGetters("drinks", ["topDrinks"]),
+    ...mapGetters("drinks", ["topDrinks", "mostLatestDrinks"]),
   },
   components: { Hero },
 });
@@ -29,7 +30,10 @@ export default Vue.extend({
 .main-section {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+
+  .home {
+    padding-block: 20px;
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -38,6 +42,7 @@ export default Vue.extend({
       padding: 40px 100px;
       display: flex;
       flex-direction: column;
+      gap: 50px;
     }
   }
 }

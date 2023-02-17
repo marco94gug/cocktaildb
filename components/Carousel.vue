@@ -58,15 +58,13 @@ export default (Vue as VueConstructor).extend({
   components: { DrinkCard },
 
   mounted() {
-    if (process.client) {
-      (this.$refs.cardScroller as HTMLDivElement)?.addEventListener(
-        "scroll",
-        (e: Event) => this.updateScrollValue(e)
-      );
-    }
+    (this.$refs.cardScroller as HTMLDivElement).addEventListener(
+      "scroll",
+      (e: Event) => this.updateScrollValue(e)
+    );
   },
 
-  destroyed() {
+  beforeRouteLeave() {
     (this.$refs.cardScroller as HTMLDivElement)?.removeEventListener(
       "scroll",
       (e: Event) => this.updateScrollValue(e)
@@ -126,12 +124,12 @@ export default (Vue as VueConstructor).extend({
 
 .carousel-container {
   position: relative;
-  margin: 20px 0;
   padding: 10px 0;
   .carousel {
     display: flex;
     gap: 10px;
     width: 100%;
+    padding-block: 5px;
     overflow-x: scroll;
     box-sizing: border-box;
 
@@ -150,6 +148,7 @@ export default (Vue as VueConstructor).extend({
     height: 100%;
     width: calc(100% + 40px);
     pointer-events: none;
+    display: none;
 
     button {
       flex: 0 0 auto;
@@ -161,6 +160,8 @@ export default (Vue as VueConstructor).extend({
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.166);
       cursor: pointer;
       pointer-events: all;
+      opacity: 1;
+      transition: all 0.15s;
 
       &.inactive {
         opacity: 0;
@@ -182,9 +183,16 @@ export default (Vue as VueConstructor).extend({
   .carousel-title {
     margin: 0;
   }
-  .carousel {
-    gap: 10px;
-    width: calc(100% - 40px);
+
+  .carousel-container {
+    margin-block: 20px;
+    .buttons {
+      display: flex;
+    }
+    .carousel {
+      gap: 10px;
+      // width: calc(100% - 40px);
+    }
   }
 }
 </style>

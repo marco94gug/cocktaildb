@@ -28,7 +28,7 @@ export default Vue.extend({
 
   methods: {
     onClick(id: string) {
-      this.$emit("clicked", id as string);
+      this.$emit("clicked", id);
     },
   },
 });
