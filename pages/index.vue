@@ -35,7 +35,7 @@ export default Vue.extend({
 @media only screen and (min-width: 768px) {
   .main-section {
     .home {
-      padding: 100px;
+      padding: 40px 100px;
       display: flex;
       flex-direction: column;
     }
