@@ -110,7 +110,7 @@ export default (Vue as VueConstructor).extend({
     },
 
     clickCard(id: string) {
-      this.$router.push(`/drink/${id}`);
+      this.$router.push(`/drink/${id}/`);
     },
   },
 });
