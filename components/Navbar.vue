@@ -29,6 +29,7 @@
 import Vue, { VueConstructor } from "vue";
 import { mapGetters } from "vuex";
 import { mapMutations } from "vuex";
+import { buildUrlPath } from "~/services/categories/url";
 import { DrinksType } from "~/ts-types/category";
 
 export default (
@@ -84,13 +85,7 @@ export default (
     handleCategoryClick(category: DrinksType): void {
       const router = this.$router;
       this.closeAllOpenedMenus();
-      router.push(
-        `/category/${category.strCategory
-          .toLocaleLowerCase()
-          .replaceAll(" ", "-")
-          .replaceAll("/", "")
-          .replaceAll(/--/g, "-")}`
-      );
+      router.push(`/category/${buildUrlPath(category.strCategory)}`);
     },
 
     handleMenuLIElementClick(e: MouseEvent): void {
@@ -113,7 +108,9 @@ export default (
 
 <style lang="scss" scoped>
 nav {
-  position: relative;
+  position: static;
+  top: 0;
+  width: 100%;
   z-index: 4;
   display: flex;
   justify-content: space-between;

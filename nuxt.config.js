@@ -15,7 +15,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["~/assets/css/global.css"],
+  css: ["~/assets/css/global.scss"],
 
   env: {
     API_KEY: process.env.API_KEY,

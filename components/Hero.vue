@@ -1,5 +1,12 @@
 <template>
-  <section class="hero">
+  <section class="hero" v-if="$route.name === 'drink'">
+    <div>
+      <div class="img-container" style="width: 100vw">
+        <img class="hero-img-static" :src="drinkInfo.strDrinkThumb" />
+      </div>
+    </div>
+  </section>
+  <section class="hero" v-else>
     <div class="title">
       <h2>{{ topDrinks[scrollValue / 100].strDrink }}</h2>
       <div class="categories">
@@ -38,9 +45,11 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue, { PropType } from "vue";
+import { VueConstructor } from "vue/types/umd";
+import { drinkType } from "~/ts-types/drinks";
 
-export default Vue.extend({
+export default (Vue as VueConstructor).extend({
   name: "Hero",
 
   data() {
@@ -49,11 +58,19 @@ export default Vue.extend({
     };
   },
 
-  props: ["topDrinks"],
+  props: {
+    topDrinks: {
+      type: [] as PropType<drinkType[]>,
+    },
+
+    drinkInfo: {
+      type: Object as PropType<drinkType>,
+    },
+  },
 
   computed: {
     maxValue(): number {
-      return (this.topDrinks.length - 1) * 100;
+      return (this.topDrinks?.length - 1) * 100;
     },
   },
 
@@ -80,7 +97,6 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .hero {
   position: relative;
-  margin-top: 54px;
   height: 30vh;
   overflow: hidden;
   background-color: #333333;
@@ -166,13 +182,18 @@ export default Vue.extend({
         filter: blur(1.5px);
         object-position: 0 -60px;
       }
+
+      .hero-img-static {
+        width: 100%;
+        object-fit: cover;
+      }
     }
   }
 }
 
 @media only screen and (min-width: 768px) {
   .hero {
-    margin-top: 80px;
+    margin-top: 0;
     height: 40vh;
 
     .title {
