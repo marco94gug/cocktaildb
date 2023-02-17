@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <div :class="`${drinksList.drinks ? 'results active' : 'results'}`">
+    <div v-if="drinksList.drinks" class="results">
       <ul>
         <li
           v-for="drink in drinksList.drinks"
@@ -128,24 +128,23 @@ export default Vue.extend({
     top: 58px;
     left: 0;
     width: 100%;
-    height: 0;
+    height: max-content;
     background-color: rgba(255, 255, 255, 0.436);
     backdrop-filter: blur(5px);
-    display: none;
     color: rgb(26, 26, 26);
     letter-spacing: 1px;
     font-weight: bold;
 
-    &.active {
-      display: block;
-      height: max-content;
-    }
-
     ul {
       display: flex;
       flex-direction: column;
-      gap: 5px;
       padding: 10px 20px;
+      max-height: 400px;
+      overflow-y: auto;
+
+      li {
+        padding-block: 3px;
+      }
     }
   }
 }
@@ -162,7 +161,17 @@ export default Vue.extend({
       top: 34px;
 
       ul {
-        padding: 10px;
+        // padding: 10px;
+        padding: 10px 0;
+
+        li {
+          cursor: pointer;
+          padding-inline: 10px;
+
+          &:hover {
+            background-color: white;
+          }
+        }
       }
     }
   }

@@ -1,6 +1,6 @@
 import { ActionTree } from "vuex";
-import { drinksRes } from "~/ts-types/drinks";
-import { RootState } from "~/ts-types/rootState";
+import { drinksRes } from "../../ts-types/drinks";
+import { RootState } from "../../ts-types/rootState";
 
 import { SET_SEARCH_RESULTS } from "./mutations";
 

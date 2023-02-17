@@ -1,6 +1,6 @@
 import { ActionTree } from "vuex";
-import { drinksState } from "~/ts-types/drinks";
-import { RootState } from "~/ts-types/rootState";
+import { drinksState } from "../../ts-types/drinks";
+import { RootState } from "../../ts-types/rootState";
 
 import { SET_DRINK, SET_MOST_LATEST_DRINKS, SET_TOP_DRINKS } from "./mutations";
 
@@ -24,11 +24,7 @@ const actions: ActionTree<RootState, drinksState> = {
   },
 
   async loadMostLatestDrinks({ commit }) {
-    const mostLatestDrinksRes = await this.$rapidCocktail.$get("filter.php", {
-      params: {
-        a: "Alcoholic",
-      },
-    });
+    const mostLatestDrinksRes = await this.$rapidCocktail.$get("latest.php");
 
     commit(SET_MOST_LATEST_DRINKS, mostLatestDrinksRes);
   },

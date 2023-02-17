@@ -125,3 +125,24 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #1a1a1a #ffffffa9;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffffa9;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #1a1a1a;
+  border-radius: 10px;
+}

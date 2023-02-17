@@ -1,12 +1,12 @@
 <template>
   <section class="hero">
-    <title>
-      <h2>{{ topDrinks[scrollValue / 100].strDrink }}</h2> <div
-      class="categories"> <span>{{
-        topDrinks[scrollValue / 100].strCategory
-      }}</span> <span>{{ topDrinks[scrollValue / 100].strAlcoholic }}</span>
+    <div class="title">
+      <h2>{{ topDrinks[scrollValue / 100].strDrink }}</h2>
+      <div class="categories">
+        <span>{{ topDrinks[scrollValue / 100].strCategory }}</span>
+        <span>{{ topDrinks[scrollValue / 100].strAlcoholic }}</span>
       </div>
-    </title>
+    </div>
     <div>
       <div class="button_container">
         <button @click="prevPic">
@@ -85,7 +85,7 @@ export default Vue.extend({
   overflow: hidden;
   background-color: #333333;
 
-  title {
+  .title {
     position: absolute;
     top: 0;
     right: 15%;
@@ -172,10 +172,10 @@ export default Vue.extend({
 
 @media only screen and (min-width: 768px) {
   .hero {
-    margin-top: 0;
+    margin-top: 80px;
     height: 40vh;
 
-    title {
+    .title {
       flex-direction: column;
       justify-content: center;
       right: 10%;

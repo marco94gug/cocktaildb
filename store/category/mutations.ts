@@ -1,5 +1,5 @@
 import { MutationTree } from "vuex";
-import { CategoryResponse, CategoryListType } from "~/ts-types/category";
+import { CategoryResponse, CategoryListType } from "../../ts-types/category";
 
 export const SET_CATEGORY_LIST = "SET_CATEGORY_LIST";
 

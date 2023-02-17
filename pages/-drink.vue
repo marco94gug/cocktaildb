@@ -9,10 +9,6 @@ import Vue from "vue";
 import { mapGetters } from "vuex";
 
 export default Vue.extend({
-  data() {
-    return {};
-  },
-
   middleware: "drink-dispatch",
 
   computed: {
@@ -23,6 +19,6 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 main {
-  margin: 100px 0;
+  padding: 100px 30px;
 }
 </style>
