@@ -1,6 +1,6 @@
 import { ActionTree } from "vuex";
 
-import { SET_CATEGORY_LIST } from "./mutations";
+import { SET_CATEGORY_LIST, SET_CATEGORY_FILTER } from "./mutations";
 import { CategoryListType } from "../../ts-types/category";
 import { RootState } from "../../ts-types/rootState";
 
@@ -18,7 +18,24 @@ const actions: ActionTree<CategoryListType, RootState> = {
 
       commit(SET_CATEGORY_LIST, categoryList.data);
     } catch (e) {
-      console.log(e);
+      console.error(e);
+    }
+  },
+
+  async loadCategoryFilter({ commit }, category: string) {
+    try {
+      const drinkListFilteredByCategory = await this.$rapidCocktail(
+        "/filter.php",
+        {
+          params: {
+            c: category,
+          },
+        }
+      );
+
+      commit(SET_CATEGORY_FILTER, drinkListFilteredByCategory.data);
+    } catch (error) {
+      console.error(error);
     }
   },
 };

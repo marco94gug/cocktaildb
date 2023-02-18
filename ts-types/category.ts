@@ -6,8 +6,25 @@ type DrinksType = {
   strCategory: string;
 };
 
-type CategoryListType = {
-  categoryList: CategoryResponse;
+type DrinkFiltered = {
+  strDrink: string;
+  strDrinkThumb: string;
+  idDrink: string;
 };
 
-export { CategoryListType, CategoryResponse, DrinksType };
+interface FilteredDrinkByCategory {
+  drinks: DrinkFiltered[];
+}
+
+type CategoryListType = {
+  categoryList: CategoryResponse;
+  filteredByCategory: FilteredDrinkByCategory;
+};
+
+export {
+  CategoryListType,
+  CategoryResponse,
+  DrinksType,
+  DrinkFiltered,
+  FilteredDrinkByCategory,
+};

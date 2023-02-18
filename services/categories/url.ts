@@ -1,8 +1,8 @@
 export const buildUrlPath = (categoryString: string): string => {
   const urlFormatted = categoryString
     .toLocaleLowerCase()
-    .replaceAll(" ", "-")
-    .replaceAll("/", "")
+    .replaceAll(" ", "_")
+    .replaceAll("/", "&")
     .replaceAll(/--/g, "-");
 
   return urlFormatted;

@@ -39,7 +39,7 @@ import DrinkCard from "./DrinkCard.vue";
 export default (Vue as VueConstructor).extend({
   data() {
     return {
-      clientWidth: 0,
+      clientWidth: 1,
       scrollLeft: 0,
       scrollWidth: 0,
     };
@@ -75,7 +75,13 @@ export default (Vue as VueConstructor).extend({
     isMaxScrollValue(): boolean {
       const scrollDimension = this.scrollWidth - this.clientWidth;
 
-      return this.scrollLeft ? scrollDimension === this.scrollLeft : false;
+      if (scrollDimension > this.scrollLeft) {
+        return scrollDimension === Math.ceil(this.scrollLeft);
+      } else if (scrollDimension < this.scrollLeft) {
+        return scrollDimension === Math.floor(this.scrollLeft);
+      } else {
+        return false;
+      }
     },
 
     isMinScrollValue(): boolean {
@@ -91,6 +97,9 @@ export default (Vue as VueConstructor).extend({
     scrollTo(direction: string) {
       const cardScrollerTarget = this.$refs.cardScroller as HTMLDivElement;
       const offset = direction === "right" ? Math.abs(600) : -Math.abs(600);
+
+      console.log("scrollDimension", this.scrollWidth - this.clientWidth);
+      console.log("scrollLeft", Math.floor(this.scrollLeft));
 
       cardScrollerTarget.scrollTo({
         top: 0,
