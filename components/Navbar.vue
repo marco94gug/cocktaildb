@@ -123,7 +123,7 @@ nav {
   background-color: #333333;
   height: 80px;
   color: rgb(245, 245, 245);
-  font-family: "Big Shoulders Display", cursive;
+  font-family: "Big Shoulders Display", Helvetica, sans-serif;
 
   h1 {
     font-size: 2rem;

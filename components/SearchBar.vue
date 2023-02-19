@@ -125,8 +125,9 @@ export default Vue.extend({
 
   .results {
     position: absolute;
-    top: 58px;
+    top: 54px;
     left: 0;
+    z-index: 4;
     width: 100%;
     height: max-content;
     background-color: rgba(255, 255, 255, 0.436);
