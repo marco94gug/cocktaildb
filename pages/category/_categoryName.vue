@@ -1,12 +1,6 @@
 <template>
   <section>
-    <div class="breadcrumbs">
-      <ul>
-        <li @click="$router.push('/')">Home</li>
-        <span>></span>
-        <li @click="">{{ categoryName }}</li>
-      </ul>
-    </div>
+    <Breadcrumbs :links="[categoryName]" />
     <div class="category_main_content">
       <h2>{{ categoryName }}</h2>
     </div>
@@ -16,6 +10,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { mapGetters } from "vuex";
+import Breadcrumbs from "~/components/Breadcrumbs.vue";
 import { FilteredDrinkByCategory } from "~/ts-types/category";
 
 declare module "vue/types/vue" {
@@ -26,9 +21,7 @@ declare module "vue/types/vue" {
 
 export default Vue.extend({
   name: "categoryPage",
-
   middleware: "categoryPage-dispatch",
-
   computed: {
     ...mapGetters("category", ["filteredByCategory"]),
     categoryName(): string {
@@ -37,12 +30,12 @@ export default Vue.extend({
         .replaceAll("_", " ");
     },
   },
-
   methods: {
     categoryLog() {
       console.log(this.filteredByCategory);
     },
   },
+  components: { Breadcrumbs },
 });
 </script>
 

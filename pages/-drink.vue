@@ -1,7 +1,7 @@
 <template>
   <section>
     <Hero :drinkInfo="drink" />
-    <div class="breadcrumbs">
+    <!-- <div class="breadcrumbs">
       <ul>
         <li @click="$router.push('/')">Home</li>
         <span>></span>
@@ -11,7 +11,11 @@
           {{ drink.strDrink }}
         </li>
       </ul>
-    </div>
+    </div> -->
+    <Breadcrumbs
+      :links="[drink.strCategory, drink.strDrink]"
+      @OnClickLink="categoryClick"
+    />
     <h1>{{ drink.strDrink }}</h1>
   </section>
 </template>
@@ -19,6 +23,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { mapGetters } from "vuex";
+import Breadcrumbs from "~/components/Breadcrumbs.vue";
 import Hero from "~/components/Hero.vue";
 import { buildUrlPath } from "~/services/categories/url";
 
@@ -27,11 +32,11 @@ export default Vue.extend({
   computed: {
     ...mapGetters("drinks", ["drink"]),
   },
-  components: { Hero },
+  components: { Hero, Breadcrumbs },
 
   methods: {
-    categoryClick() {
-      this.$router.push(`/category/${buildUrlPath(this.drink.strCategory)}`);
+    categoryClick(link: string) {
+      this.$router.push(`/category/${buildUrlPath(link)}`);
     },
   },
 });
