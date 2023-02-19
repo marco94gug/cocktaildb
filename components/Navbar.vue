@@ -2,9 +2,9 @@
   <nav @mouseleave="closeAllOpenedMenus">
     <h1 @click="handleHomeClick">The Cocktail DB</h1>
     <HamMen :setActiveMenu="setActiveMenu" />
-    <ul :class="`menu-list ${hamMenuIsActive ? 'active' : ''}`">
+    <ul class="menu-list" :class="` ${hamMenuIsActive ? 'active' : ''}`">
       <li @click="handleHomeClick">Home</li>
-      <li @click="(e) => handleMenuLIElementClick(e)">Cocktails</li>
+      <li @click="handleMenuLIElementClick">Cocktails</li>
       <li
         :class="`category ${categoryListIsActive ? 'active' : ''}`"
         @click="handleCategoriesClick"
@@ -49,11 +49,11 @@ export default (
   },
 
   computed: {
-    // ...mapGetters("category", ["categoryList"]),
+    ...mapGetters("category", ["categoryList"]),
     ...mapGetters("navbar", ["hamMenuIsActive", "categoryListIsActive"]),
-    categoryList() {
-      return this.$store.getters["category/categoryList"];
-    },
+    // categoryList() {
+    //   return this.$store.getters["category/categoryList"];
+    // },
   },
 
   methods: {
@@ -65,7 +65,12 @@ export default (
     ]),
     setActiveMenu(): void {
       this.SET_HAMMENU_OPEN_CLOSE();
-      console.log("cliccato");
+
+      if (this.hamMenuIsActive) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "auto";
+      }
 
       if (this.categoryList) {
         this.SET_CATEGORYLIST_CLOSE();
@@ -101,6 +106,8 @@ export default (
     closeAllOpenedMenus(): void {
       this.SET_HAMMENU_CLOSE();
       this.SET_CATEGORYLIST_CLOSE();
+
+      document.body.style.overflow = "auto";
     },
   },
 });
@@ -127,11 +134,12 @@ nav {
     cursor: pointer;
   }
 
-  ul {
+  .menu-list {
     position: absolute;
-    top: calc(80px + 34px);
+    top: calc(80px + 54px);
     background-color: #2b2b2b;
     right: 0;
+    z-index: 4;
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -140,6 +148,10 @@ nav {
     height: 0px;
     overflow: hidden;
     transition: all 0.35s;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     &.active {
       height: calc(100vh - (80px + 54px - 20px));
@@ -216,7 +228,7 @@ nav {
       width: max-content;
     }
 
-    ul {
+    .menu-list {
       flex-direction: row;
       justify-content: flex-start;
       position: relative;

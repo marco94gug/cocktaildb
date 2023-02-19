@@ -202,7 +202,7 @@ export default (Vue as VueConstructor).extend({
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    font-size: 2.4rem;
+    font-size: 1.8rem;
     color: $whiteTransparentFont;
     text-shadow: 0 0 8px rgba(0, 0, 0, 0.715);
   }

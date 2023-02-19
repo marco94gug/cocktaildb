@@ -29,7 +29,7 @@ export default Vue.extend({
 
   computed: {
     styleLinkVisited() {
-      return "text-decoration: none; cursor: default; color: #00000065";
+      return "text-decoration: none; cursor: default; color: #00000065; pointer-events: none";
     },
   },
 
@@ -47,14 +47,15 @@ export default Vue.extend({
   color: rgb(37, 37, 37);
   font-weight: bold;
   text-transform: capitalize;
+  font-size: 0.8rem;
 
   ul {
     display: flex;
-    gap: 10px;
+    gap: 5px;
 
     div {
       display: flex;
-      gap: 10px;
+      gap: 5px;
       align-items: center;
     }
 
