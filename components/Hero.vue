@@ -2,6 +2,7 @@
   <section class="hero" v-if="$route.name === 'drink'">
     <div>
       <div class="img-container" style="width: 100vw">
+        <h2 class="drink_title">{{ drinkInfo.strDrink }}</h2>
         <img class="hero-img-static" :src="drinkInfo.strDrinkThumb" />
       </div>
     </div>
@@ -95,6 +96,7 @@ export default (Vue as VueConstructor).extend({
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/utils";
 .hero {
   position: relative;
   height: 30vh;
@@ -188,6 +190,21 @@ export default (Vue as VueConstructor).extend({
         object-fit: cover;
       }
     }
+  }
+
+  .drink_title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 2.4rem;
+    color: $whiteTransparentFont;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.715);
   }
 }
 

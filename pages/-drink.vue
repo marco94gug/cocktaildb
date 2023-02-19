@@ -1,23 +1,12 @@
 <template>
-  <section>
+  <main>
     <Hero :drinkInfo="drink" />
-    <!-- <div class="breadcrumbs">
-      <ul>
-        <li @click="$router.push('/')">Home</li>
-        <span>></span>
-        <li @click="categoryClick">{{ drink.strCategory }}</li>
-        <span>></span>
-        <li>
-          {{ drink.strDrink }}
-        </li>
-      </ul>
-    </div> -->
     <Breadcrumbs
       :links="[drink.strCategory, drink.strDrink]"
       @OnClickLink="categoryClick"
     />
-    <h1>{{ drink.strDrink }}</h1>
-  </section>
+    <section class="drink_main-content"></section>
+  </main>
 </template>
 
 <script lang="ts">
@@ -43,28 +32,16 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-section {
-  .breadcrumbs {
+main {
+  .drink_main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
-    color: rgb(37, 37, 37);
-    font-weight: bold;
 
-    ul {
-      display: flex;
-      gap: 10px;
-
-      li {
-        cursor: pointer;
-
-        &:hover {
-          text-decoration: underline;
-        }
-
-        &:last-child {
-          cursor: default;
-          color: rgba(0, 0, 0, 0.522);
-        }
-      }
+    h2 {
+      font-size: 1.4rem;
+      font-weight: bold;
     }
   }
 }
