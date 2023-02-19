@@ -1,5 +1,5 @@
 <template>
-  <div @click="(e) => setActiveMenu(e)">
+  <div @click="setActiveMenu" :class="`${isMenuActive ? 'active' : 'none'}`">
     <span></span>
     <span></span>
     <span></span>
@@ -12,7 +12,7 @@ import Vue from "vue";
 export default Vue.extend({
   name: "hamburgerMenu",
 
-  props: ["setActiveMenu"],
+  props: ["setActiveMenu", "isMenuActive"],
 });
 </script>
 

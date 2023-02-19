@@ -1,7 +1,7 @@
 <template>
   <nav @mouseleave="closeAllOpenedMenus">
     <h1 @click="handleHomeClick">The Cocktail DB</h1>
-    <HamMen :setActiveMenu="setActiveMenu" />
+    <HamMen :setActiveMenu="setActiveMenu" :isMenuActive="hamMenuIsActive" />
     <ul class="menu-list" :class="` ${hamMenuIsActive ? 'active' : ''}`">
       <li @click="handleHomeClick">Home</li>
       <li @click="handleMenuLIElementClick">Cocktails</li>
@@ -19,7 +19,7 @@
           {{ category.strCategory }}
         </li>
       </ol>
-      <li @click="(e) => handleMenuLIElementClick(e)">About us</li>
+      <li @click="handleMenuLIElementClick">About us</li>
     </ul>
     <SearchBar />
   </nav>
@@ -51,9 +51,6 @@ export default (
   computed: {
     ...mapGetters("category", ["categoryList"]),
     ...mapGetters("navbar", ["hamMenuIsActive", "categoryListIsActive"]),
-    // categoryList() {
-    //   return this.$store.getters["category/categoryList"];
-    // },
   },
 
   methods: {

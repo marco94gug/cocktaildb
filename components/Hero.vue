@@ -33,7 +33,7 @@
         </button>
       </div>
       <div class="img-container" v-for="drink in topDrinks">
-        <div class="overlay" :id="drink.idDrink" />
+        <div class="overlay" :id="drink.idDrink"></div>
         <img
           class="hero-img"
           :style="`right: ${scrollValue}vw`"

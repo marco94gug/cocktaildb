@@ -5,7 +5,7 @@
         type="text"
         placeholder="Search"
         v-model="inputValue"
-        @input="() => handleOnSearchInput(inputValue)"
+        @input="handleOnSearchInput(inputValue)"
         @click="closeAllMenu"
       />
       <div class="delete" v-if="inputValue">
@@ -18,7 +18,7 @@
         <li
           v-for="drink in drinksList.drinks"
           :id="drink.idDrink"
-          @click="(e) => handleDrinkClick(e)"
+          @click="handleDrinkClick"
         >
           {{ drink.strDrink }}
         </li>
