@@ -48,6 +48,7 @@ div {
 
 @media only screen and (min-width: 768px) {
   div {
+    display: none;
     span {
       opacity: 0;
     }

@@ -5,9 +5,6 @@
       <div class="carousel" ref="cardScroller">
         <DrinkCard
           v-for="drink in dataListLength(8)"
-          :title="drink.strDrink"
-          :image="drink.strDrinkThumb"
-          :key="drink.idDrink"
           :drinkInfo="drink"
           @clicked="clickCard"
         />
@@ -126,6 +123,7 @@ export default (Vue as VueConstructor).extend({
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/utils";
 .carousel-title {
   font-size: 1.4rem;
   font-weight: 700;
@@ -190,7 +188,7 @@ export default (Vue as VueConstructor).extend({
   }
 }
 
-@media only screen and (min-width: 768px) {
+@include start-from("generic-desktop") {
   .carousel-title {
     margin: 0;
   }

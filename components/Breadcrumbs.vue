@@ -42,12 +42,13 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/utils";
 .breadcrumbs {
-  padding: 20px;
+  padding: 20px 0 20px 30px;
   color: rgb(37, 37, 37);
   font-weight: bold;
   text-transform: capitalize;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
 
   ul {
     display: flex;
@@ -66,6 +67,20 @@ export default Vue.extend({
         text-decoration: underline;
       }
     }
+  }
+}
+
+@include start-from("tablet") {
+  .breadcrumbs {
+    font-size: 1rem;
+    padding-left: 30px;
+  }
+}
+
+@include start-from("desktop") {
+  .breadcrumbs {
+    font-size: 1rem;
+    padding-left: 30px;
   }
 }
 </style>

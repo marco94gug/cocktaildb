@@ -1,8 +1,10 @@
 <template>
   <div class="drink_card" @click="onClick(drinkInfo.idDrink)">
-    <img :src="image" :alt="title" />
-    <div class="drink_info">
-      <h3>{{ title }}</h3>
+    <img :src="drinkInfo.strDrinkThumb" :alt="drinkInfo.strDrink" />
+    <div :class="`drink_info ${isCategoryFilteredDrink ? 'category' : ''}`">
+      <h3>{{ drinkInfo.strDrink }}</h3>
+
+      <slot name="see-more"></slot>
     </div>
   </div>
 </template>
@@ -12,17 +14,15 @@ import Vue from "vue";
 
 export default Vue.extend({
   props: {
-    title: {
-      type: String,
-      required: true,
-    },
-    image: {
-      type: String,
-      required: true,
-    },
     drinkInfo: {
       type: Object,
       required: true,
+    },
+  },
+
+  computed: {
+    isCategoryFilteredDrink(): boolean {
+      return this.$route.params.categoryName ? true : false;
     },
   },
 
@@ -35,6 +35,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/utils";
 .drink_card {
   background-color: rgb(239, 239, 239);
   border-radius: 10px;
@@ -50,10 +51,33 @@ export default Vue.extend({
 
   .drink_info {
     display: flex;
+    justify-content: center;
     align-items: center;
     height: 40px;
     padding: 0 10px;
     font-size: 0.95rem;
+
+    &.category {
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      height: 100%;
+      width: 100%;
+      padding: 12px;
+
+      h3 {
+        font-weight: bold;
+        color: $mainFont;
+      }
+
+      p {
+        align-self: flex-end;
+        font-weight: 200;
+        font-size: 0.8rem;
+        color: rgba(0, 0, 0, 0.288);
+      }
+    }
   }
 }
 
