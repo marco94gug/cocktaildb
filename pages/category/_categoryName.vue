@@ -94,6 +94,16 @@ section {
   }
 }
 
+@include start-from("phone") {
+  section {
+    .category_main_content {
+      .grid-drink {
+        width: 100%;
+      }
+    }
+  }
+}
+
 @include start-from("tablet") {
   section {
     .category_main_content {
@@ -130,12 +140,32 @@ section {
 @include start-from("desktop-large") {
   section {
     .category_main_content {
+      margin-top: 0;
+      gap: 56px;
+
       h2 {
         font-size: 1.7rem;
       }
 
       .grid-drink {
         grid-template-columns: repeat(4, 300px);
+      }
+    }
+  }
+}
+
+@include start-from("desktop-extralarge") {
+  section {
+    .category_main_content {
+      margin-top: 0px;
+      gap: 56px;
+
+      h2 {
+        font-size: 1.7rem;
+      }
+
+      .grid-drink {
+        grid-template-columns: repeat(5, 300px);
       }
     }
   }

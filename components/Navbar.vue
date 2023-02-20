@@ -111,6 +111,7 @@ export default (
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/utils";
 nav {
   position: static;
   top: 0;
@@ -214,7 +215,7 @@ nav {
   }
 }
 
-@media only screen and (min-width: 768px) {
+@include start-from("generic-desktop") {
   nav {
     position: fixed;
     width: 100%;
@@ -226,6 +227,7 @@ nav {
     }
 
     .menu-list {
+      margin-left: 10px;
       flex-direction: row;
       justify-content: flex-start;
       position: relative;
