@@ -97,9 +97,6 @@ export default (Vue as VueConstructor).extend({
       const cardScrollerTarget = this.$refs.cardScroller as HTMLDivElement;
       const offset = direction === "right" ? Math.abs(600) : -Math.abs(600);
 
-      console.log("scrollDimension", this.scrollWidth - this.clientWidth);
-      console.log("scrollLeft", Math.floor(this.scrollLeft));
-
       cardScrollerTarget.scrollTo({
         top: 0,
         left: cardScrollerTarget.scrollLeft + offset,
