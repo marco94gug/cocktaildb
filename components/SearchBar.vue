@@ -162,7 +162,6 @@ export default Vue.extend({
       top: 34px;
 
       ul {
-        // padding: 10px;
         padding: 10px 0;
 
         li {

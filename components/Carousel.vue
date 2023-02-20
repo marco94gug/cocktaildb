@@ -79,6 +79,8 @@ export default (Vue as VueConstructor).extend({
         return scrollDimension === Math.ceil(this.scrollLeft);
       } else if (scrollDimension < this.scrollLeft) {
         return scrollDimension === Math.floor(this.scrollLeft);
+      } else if (scrollDimension === this.scrollLeft) {
+        return true;
       } else {
         return false;
       }
@@ -200,7 +202,6 @@ export default (Vue as VueConstructor).extend({
     }
     .carousel {
       gap: 10px;
-      // width: calc(100% - 40px);
     }
   }
 }
