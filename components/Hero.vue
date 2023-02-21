@@ -75,10 +75,6 @@ export default (Vue as VueConstructor).extend({
     },
   },
 
-  updated() {
-    console.log(this.scrollValue / 100);
-  },
-
   methods: {
     nextPic(): void {
       if (this.scrollValue < this.maxValue) {

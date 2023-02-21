@@ -25,7 +25,10 @@ export default Vue.extend({
 
   methods: {
     categoryClick(link: string) {
-      this.$router.push(`/category/${buildUrlPath(link)}`);
+      this.$router.push({
+        name: "search-page",
+        query: { category: buildUrlPath(link) },
+      });
     },
   },
 });

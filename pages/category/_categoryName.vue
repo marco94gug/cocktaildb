@@ -56,13 +56,15 @@ export default Vue.extend({
     ...mapGetters("category", ["filteredByCategory", "drinksResults"]),
 
     mainTitle() {
-      console.log(this.drinksResults.drinks);
       if (this.$route.query.category) {
-        return (this.$route.query.category as string)
-          ?.replace("-", "/")
-          .replaceAll("_", " ");
+        this.filteredByCategory.drinks;
+        return this.filteredByCategory.drinks
+          ? (this.$route.query.category as string)
+              ?.replace("-", "/")
+              .split("_")
+              .join(" ")
+          : "ERROR";
       } else {
-        console.log(this.drinksResults.drinks);
         return `You searched for ${this.$route.query.text as string}`;
       }
     },
@@ -82,13 +84,13 @@ export default Vue.extend({
   components: { Breadcrumbs, DrinkCard },
   mounted() {
     // Formatting the title from url path for API call on refresh
+
     if (this.$route.query.category) {
       this.title = (this.$route.query.category as string)
         ?.replace("-", "/")
-        .replaceAll("_", " ");
+        ?.replaceAll("_", " ");
     } else {
       this.title = `You searched for ${this.$route.query.text as string}`;
-      console.log(this.drinksResults.drinks);
     }
   },
 });

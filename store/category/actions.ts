@@ -38,14 +38,17 @@ const actions: ActionTree<CategoryListType, RootState> = {
         }
       );
 
+      if (typeof drinkListFilteredByCategory.data.drinks === "string") {
+        throw Error;
+      }
+
       commit(SET_CATEGORY_FILTER, drinkListFilteredByCategory.data);
     } catch (error) {
-      console.error(error);
+      console.error("Something went wrong :(");
     }
   },
 
   async loadSearchResultedForPage({ commit }, query) {
-    console.log("dentro l'altra");
     try {
       const resResults = await this.$rapidCocktail.$get("/search.php", {
         params: {
@@ -55,7 +58,7 @@ const actions: ActionTree<CategoryListType, RootState> = {
 
       commit(SET_SEARCHED_RESULTS, resResults);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   },
 };
