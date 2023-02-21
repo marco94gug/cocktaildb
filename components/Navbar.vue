@@ -87,7 +87,10 @@ export default (
     handleCategoryClick(category: DrinksType): void {
       const router = this.$router;
       this.closeAllOpenedMenus();
-      router.push(`/category/${buildUrlPath(category.strCategory)}`);
+      router.push({
+        name: "search-page",
+        query: { category: buildUrlPath(category.strCategory) },
+      });
     },
 
     handleMenuLIElementClick(e: MouseEvent): void {

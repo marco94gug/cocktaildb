@@ -6,6 +6,7 @@ import { RootState } from "../../ts-types/rootState";
 const getters: GetterTree<CategoryListType, RootState> = {
   categoryList: (state) => state.categoryList,
   filteredByCategory: (state) => state.filteredByCategory,
+  drinksResults: (state) => state.drinksResults,
 };
 
 export default getters;

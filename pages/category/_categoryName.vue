@@ -1,11 +1,17 @@
 <template>
   <section>
-    <Breadcrumbs :links="[title]" />
+    <Breadcrumbs :links="[$route.query.text ? 'search' : mainTitle]" />
     <div class="category_main_content">
-      <h2>{{ title }}</h2>
-      <div class="grid-drink">
+      <h2>{{ mainTitle }}</h2>
+      <div
+        class="grid-drink"
+        v-if="
+          filteredByCategory.drinks?.length > 0 ||
+          drinksResults.drinks?.length > 0
+        "
+      >
         <DrinkCard
-          v-for="drink in filteredByCategory.drinks"
+          v-for="drink in filteredByCategory.drinks ?? drinksResults.drinks"
           :drinkInfo="drink"
           @clicked="clickCard"
         >
@@ -13,6 +19,10 @@
             <p>see more</p>
           </template>
         </DrinkCard>
+      </div>
+      <div class="no-results" v-else>
+        <h3>Something went wrong :(</h3>
+        <img src="../../assets/img/404.png" />
       </div>
     </div>
   </section>
@@ -24,11 +34,13 @@ import { mapGetters } from "vuex";
 import Breadcrumbs from "~/components/Breadcrumbs.vue";
 import DrinkCard from "~/components/DrinkCard.vue";
 import { FilteredDrinkByCategory } from "~/ts-types/category";
+import { drinksListType } from "~/ts-types/drinks";
 
 declare module "vue/types/vue" {
   interface Vue {
     filteredByCategory: FilteredDrinkByCategory;
     title: string;
+    drinksResults: drinksListType;
   }
 }
 
@@ -41,7 +53,26 @@ export default Vue.extend({
   },
   middleware: "categoryPage-dispatch",
   computed: {
-    ...mapGetters("category", ["filteredByCategory"]),
+    ...mapGetters("category", ["filteredByCategory", "drinksResults"]),
+
+    mainTitle() {
+      console.log(this.drinksResults.drinks);
+      if (this.$route.query.category) {
+        return (this.$route.query.category as string)
+          ?.replace("-", "/")
+          .replaceAll("_", " ");
+      } else {
+        console.log(this.drinksResults.drinks);
+        return `You searched for ${this.$route.query.text as string}`;
+      }
+    },
+
+    gettedResults() {
+      return (
+        this.filteredByCategory.drinks !== null ||
+        this.drinksResults.drinks !== null
+      );
+    },
   },
   methods: {
     clickCard(id: string) {
@@ -50,10 +81,15 @@ export default Vue.extend({
   },
   components: { Breadcrumbs, DrinkCard },
   mounted() {
-    // Formatting the title from url path
-    this.title = this.$route.params?.categoryName
-      .replace("-", "/")
-      .replaceAll("_", " ");
+    // Formatting the title from url path for API call on refresh
+    if (this.$route.query.category) {
+      this.title = (this.$route.query.category as string)
+        ?.replace("-", "/")
+        .replaceAll("_", " ");
+    } else {
+      this.title = `You searched for ${this.$route.query.text as string}`;
+      console.log(this.drinksResults.drinks);
+    }
   },
 });
 </script>
@@ -89,6 +125,23 @@ section {
           width: 80%;
           margin: 0 auto;
         }
+      }
+    }
+
+    .no-results {
+      position: absolute;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+      height: 100vh;
+      pointer-events: none;
+      opacity: 0.8;
+
+      img {
+        width: 50%;
       }
     }
   }

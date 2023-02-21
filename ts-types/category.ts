@@ -1,3 +1,5 @@
+import { drinksListType } from "./drinks";
+
 type CategoryResponse = {
   drinks: Array<DrinksType>;
 };
@@ -19,6 +21,7 @@ interface FilteredDrinkByCategory {
 type CategoryListType = {
   categoryList: CategoryResponse;
   filteredByCategory: FilteredDrinkByCategory;
+  drinksResults: drinksListType;
 };
 
 export {

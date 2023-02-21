@@ -1,6 +1,6 @@
 <template>
   <div class="main-search">
-    <div class="search-bar">
+    <form class="search-bar" @submit="handleSubmitEvent">
       <input
         type="text"
         placeholder="Search"
@@ -11,9 +11,9 @@
       <div class="delete" v-if="inputValue">
         <font-awesome-icon icon="fa fa-circle-xmark" @click="clearSearchBar" />
       </div>
-    </div>
+    </form>
 
-    <div v-if="drinksList.drinks" class="results">
+    <div v-if="isResultsVisible" class="results">
       <ul>
         <li
           v-for="drink in drinksList.drinks"
@@ -29,9 +29,18 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { mapGetters } from "vuex";
+import { VueConstructor } from "vue/types/umd";
+import { mapGetters, mapMutations } from "vuex";
+import { drinksListType } from "~/ts-types/drinks";
 
-export default Vue.extend({
+export default (
+  Vue as VueConstructor<
+    Vue & {
+      drinksList: drinksListType;
+      drinksResults: drinksListType;
+    }
+  >
+).extend({
   name: "SearchBar",
 
   setup() {
@@ -42,14 +51,22 @@ export default Vue.extend({
 
   computed: {
     ...mapGetters("search", ["drinksList"]),
+    ...mapGetters("category", ["drinksResults"]),
+
+    isResultsVisible() {
+      return Boolean(this.drinksList.drinks);
+    },
   },
 
   methods: {
+    ...mapMutations("category", ["CLEAR_SEARCHED_RESULTS"]),
+    ...mapMutations("search", ["CLEAR_SEARCH_RESULTS"]),
     handleOnSearchInput(input: string): void {
       if (input.length > 1) {
         this.$store.dispatch("search/loadSearchResults", input);
       } else {
-        this.$store.commit("search/CLEAR_SEARCH_RESULTS");
+        console.log("pulisco");
+        this.CLEAR_SEARCH_RESULTS();
       }
     },
     closeAllMenu(): void {
@@ -67,6 +84,21 @@ export default Vue.extend({
     clearSearchBar(): void {
       this.inputValue = "";
       this.$store.commit("search/CLEAR_SEARCH_RESULTS");
+    },
+
+    handleSubmitEvent(e: Event) {
+      e.preventDefault();
+      this.$store.commit("category/CLEAR_CATEGORY_FILTERED");
+
+      this.$router.push({
+        name: "search-page",
+        query: { text: this.inputValue },
+      });
+      this.clearSearchBar();
+
+      if (this.drinksResults.drinks) {
+        this.CLEAR_SEARCHED_RESULTS();
+      }
     },
   },
 });

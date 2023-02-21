@@ -53,11 +53,18 @@ export default {
 
   router: {
     extendRoutes(routes, resolve) {
-      routes.push({
-        name: "drink",
-        path: "/drink/:id",
-        component: resolve(__dirname, "pages/-drink.vue"),
-      });
+      routes.push(
+        {
+          name: "drink",
+          path: "/drink/:id",
+          component: resolve(__dirname, "pages/-drink.vue"),
+        },
+        {
+          name: "search-page",
+          path: "/lookup/",
+          component: resolve(__dirname, "pages/category/_categoryName.vue"),
+        }
+      );
     },
   },
 };

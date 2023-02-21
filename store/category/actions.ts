@@ -1,6 +1,11 @@
 import { ActionTree } from "vuex";
 
-import { SET_CATEGORY_LIST, SET_CATEGORY_FILTER } from "./mutations";
+import {
+  SET_CATEGORY_LIST,
+  SET_CATEGORY_FILTER,
+  SET_SEARCHED_RESULTS,
+} from "./mutations";
+
 import { CategoryListType } from "../../ts-types/category";
 import { RootState } from "../../ts-types/rootState";
 
@@ -36,6 +41,21 @@ const actions: ActionTree<CategoryListType, RootState> = {
       commit(SET_CATEGORY_FILTER, drinkListFilteredByCategory.data);
     } catch (error) {
       console.error(error);
+    }
+  },
+
+  async loadSearchResultedForPage({ commit }, query) {
+    console.log("dentro l'altra");
+    try {
+      const resResults = await this.$rapidCocktail.$get("/search.php", {
+        params: {
+          s: query,
+        },
+      });
+
+      commit(SET_SEARCHED_RESULTS, resResults);
+    } catch (error) {
+      console.log(error);
     }
   },
 };

@@ -22,7 +22,7 @@ export default Vue.extend({
 
   computed: {
     isCategoryFilteredDrink(): boolean {
-      return this.$route.params.categoryName ? true : false;
+      return this.$route.name === "search-page" ? true : false;
     },
   },
 
