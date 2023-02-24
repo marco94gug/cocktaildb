@@ -57,7 +57,6 @@ export default Vue.extend({
 
     mainTitle() {
       if (this.$route.query.category) {
-        this.filteredByCategory.drinks;
         return this.filteredByCategory.drinks
           ? (this.$route.query.category as string)
               ?.replace("-", "/")
